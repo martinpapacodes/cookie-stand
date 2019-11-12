@@ -11,9 +11,8 @@ var storeOne = {
     maxCustomer: 65,
     averageSale: 6.3,
     getRandomNumberofCustomers: function (min, max) {
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
     },
-
     perHourSale: []
 };
 
@@ -23,9 +22,7 @@ var storeTwo = {
     maxCustomer: 24,
     averageSale: 1.2,
     getRandomNumberofCustomers: function (min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
     },
     perHourSale: []
 };
@@ -36,9 +33,7 @@ var storeThree = {
     maxCustomer: 38,
     averageSale: 3.7,
     getRandomNumberofCustomers: function (min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
     },
     perHourSale: []
 };
@@ -49,9 +44,7 @@ var storeFour = {
     maxCustomer: 38,
     averageSale: 2.3,
     getRandomNumberofCustomers: function (min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
     },
     perHourSale: []
 };
@@ -62,9 +55,7 @@ var storeFive = {
     maxCustomer: 16,
     averageSale: 4.6,
     getRandomNumberofCustomers: function (min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
     },
     perHourSale: []
 };
