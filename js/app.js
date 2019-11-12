@@ -10,10 +10,10 @@ var storeOne = {
     minCustomer: 23,
     maxCustomer: 65,
     averageSale: 6.3,
-    getRandomNumberofCustomers: function (min, max){
+    getRandomNumberofCustomers: function (min, max) {
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     },
-    
+
     perHourSale: []
 };
 
@@ -22,7 +22,7 @@ var storeTwo = {
     minCustomer: 3,
     maxCustomer: 24,
     averageSale: 1.2,
-    getRandomNumberofCustomers: function (min, max){
+    getRandomNumberofCustomers: function (min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
@@ -35,7 +35,7 @@ var storeThree = {
     minCustomer: 11,
     maxCustomer: 38,
     averageSale: 3.7,
-    getRandomNumberofCustomers: function (min, max){
+    getRandomNumberofCustomers: function (min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
@@ -48,8 +48,8 @@ var storeFour = {
     minCustomer: 20,
     maxCustomer: 38,
     averageSale: 2.3,
-    getRandomNumberofCustomers: function (min, max){
-        min = Math.ceil(propertymin);
+    getRandomNumberofCustomers: function (min, max) {
+        min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     },
@@ -69,28 +69,60 @@ var storeFive = {
     perHourSale: []
 };
 
+// Functions
+
 function getPerHourSale(store) {
-
-    for(var i = 0; i < hours.length; i++) {
-        var cookiesSalePerHour  = store.averageSale * store.getRandomNumberofCustomers(store.minCustomer, store.maxCustomer);
-        // var totalSale;   
-        store.perHourSale[i] = Math.ceil(cookiesSalePerHour);
     
-        console.log(hours[i], store.perHourSale[i]);
-
-
+    for (var i = 0; i < hours.length; i++) {
+        var cookiesSalePerHour = store.averageSale * store.getRandomNumberofCustomers(store.minCustomer, store.maxCustomer);
+        store.perHourSale[i] = Math.ceil(cookiesSalePerHour);
     }
+    getTotalSale(store);
 }
 
-function getTotalSale(store){
-    var totalSale;
-    for(var i = 0; i < store.perHourSale.length; i++ ) {
-         totalSale += store.perHourSale[i];
+function getTotalSale(store) {
+    var totalSale = 0;
+    for (var i = 0; i < store.perHourSale.length; i++) {
+        totalSale += store.perHourSale[i];
     }
-    console.log('Total Sale:', totalSale);
-
+    return `Total: ${totalSale} cookies`;
 }
+
+function displaySales(store) {
+    var parentElement = document.getElementById('salesReport');
+
+    var article = document.createElement('article');
+    parentElement.appendChild(article)
+
+    var storeHeading = document.createElement('h2');
+    storeHeading.textContent = store.location;
+    article.appendChild(storeHeading);
+
+    var ul = document.createElement('ul');
+    article.appendChild(ul);
+
+
+    for (var i = 0; i < store.perHourSale.length; i++) {
+        var li = document.createElement('li');
+        li.textContent = `${hours[i]}: ${store.perHourSale[i]} cookies`;
+        ul.appendChild(li);
+    }
+
+        var li = document.createElement('li')
+        li.textContent = getTotalSale(store);
+        ul.appendChild(li);
+    
+}
+// Function Invocations
+
 getPerHourSale(storeOne);
-getTotalSale(storeOne);
-// getPerHourSale(storeTwo);
-// getPerHourSale(storeThree);
+getPerHourSale(storeTwo);
+getPerHourSale(storeThree);
+getPerHourSale(storeFour);
+getPerHourSale(storeFive);
+
+displaySales(storeOne);
+displaySales(storeTwo);
+displaySales(storeThree);
+displaySales(storeFour);
+displaySales(storeFive);
