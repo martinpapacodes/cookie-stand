@@ -7,3 +7,8 @@ th {
     padding: 2px;
     background: lavender;
   }
+
+  h2 {
+    background-color: rgb(94, 202, 202);
+    padding: 10px;
+  }
