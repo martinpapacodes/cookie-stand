@@ -31,7 +31,7 @@ function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []
     }
 }
 
-// Locations -------
+// Locations 
 
 var storeOne = new Store('Seattle', 23, 65, 6.3);
 var storeTwo = new Store('Tokyo', 3, 24, 1.2);
@@ -94,14 +94,14 @@ var storeFive = new Store('Lima', 2, 16, 4.6);
 //     perHourSale: []
 // };
 
-// Functions
+
+//Global Functions
 
 function getPerHourSale(store) {
     for (var i = 0; i < hours.length; i++) {
         var cookiesSalePerHour = store.averageSale * store.getRandomNumOfCustomers(store.minCustomer, store.maxCustomer);
         store.perHourSale[i] = Math.ceil(cookiesSalePerHour);
     }
-    getTotalSalePerDay(store);
 }
 
 function getTotalSalePerDay(store) {
@@ -112,113 +112,57 @@ function getTotalSalePerDay(store) {
     return totalSale;
 }
 
-function renderRow(store) {
-    var newRow = document.createElement('tr');
-    salesTable.appendChild(newRow);
-
-    for (var i = 0; i < store.perHourSale.length; i++) {
-        var td = document.createElement('td');
-        td.textContent = store.perHourSale[i];
-        newRow.appendChild(td);
-    }
-
-}
-
-function displaySales(store) {
-    var parentElement = document.getElementById('salesReport');
-
-    var article = document.createElement('article');
-    parentElement.appendChild(article)
-
-    var storeHeading = document.createElement('h2');
-    storeHeading.textContent = store.location;
-    article.appendChild(storeHeading);
-
-    var ul = document.createElement('ul');
-    article.appendChild(ul);
-
-
-    for (var i = 0; i < store.perHourSale.length; i++) {
-        var li = document.createElement('li');
-        li.textContent = `${hours[i]}: ${store.perHourSale[i]} cookies`;
-        ul.appendChild(li);
-    }
-
-    var li = document.createElement('li')
-    li.textContent = getTotalSale(store);
-    ul.appendChild(li);
-
-}
 // ------- Table rendering starts here --------
 
 var parentElement = document.getElementById('salesReport');
 var salesTable = document.createElement('table');
 parentElement.appendChild(salesTable);
 
+function renderHeader() {
 
-// --------- Table header ----------
-var rowHeader = document.createElement('tr');
-salesTable.appendChild(rowHeader);
+    // --------- Table header ----------
+    var rowHeader = document.createElement('tr');
+    salesTable.appendChild(rowHeader);
 
-// Creates an empty header on the very top left to shift the hours to the right
-var emptyHeader = document.createElement('th')
-emptyHeader.textContent = "";
-rowHeader.appendChild(emptyHeader);
+    // Creates an empty header on the very top left to shift the hours to the right
+    var emptyHeader = document.createElement('th')
+    emptyHeader.textContent = "";
+    rowHeader.appendChild(emptyHeader);
 
-// Loops through the hours array and render in table header
-for (var i = 0; i < hours.length; i++) {
-    var tableHeader = document.createElement('th');
-    rowHeader.appendChild(tableHeader);
-    tableHeader.textContent = hours[i];
+    // Loops through the hours array and render in table header
+    for (var i = 0; i < hours.length; i++) {
+        var tableHeader = document.createElement('th');
+        rowHeader.appendChild(tableHeader);
+        tableHeader.textContent = hours[i];
+    }
+
+    // Display Daily Location Total in the table
+    var dailyTotalHeader = document.createElement('th');
+    dailyTotalHeader.textContent = 'Daily Location Total';
+    rowHeader.appendChild(dailyTotalHeader);
 }
-
-// Display Daily Location Total in the table
-var dailyTotalHeader = document.createElement('th');
-dailyTotalHeader.textContent = 'Daily Location Total';
-rowHeader.appendChild(dailyTotalHeader);
-
-
 
 // Creates row for sales totals per hour a.k.a footer
 
-function getTotalSalesPerHour(store) {
-    var rowTotalSalesPerHour = document.createElement('tr');
-    salesTable.appendChild(rowTotalSalesPerHour);
-    
-    var rowTotal = document.createElement('td');
-    rowTotal.textContent = 'Totals';
-    rowTotalSalesPerHour.appendChild(rowTotal);
-
-    var totalSalesPerHour = 0;
-    var counter = 0;
-
-    while(counter !== 4) {    
-        var tdTotalSalesPerHour = document.createElement('td');
-        totalSalesPerHour += storeOne.perHourSale[i];
-        totalSalesPerHour += storeTwo.perHourSale[i];
-        totalSalesPerHour += storeThree.perHourSale[i];
-        totalSalesPerHour += storeFour.perHourSale[i];
-        totalSalesPerHour += storeFive.perHourSale[i];
-        tdTotalSalesPerHour.textContent = totalSalesPerHour;
-        rowTotalSalesPerHour.appendChild(tdTotalSalesPerHour);
-        counter++;
-    }
+function renderFooter(num) {
   
-    
+    var totalSalesPerHour = 0;
+    // var arrTotalSalesPerHour = [];
+        totalSalesPerHour = storeOne.perHourSale[num];
+        totalSalesPerHour += storeTwo.perHourSale[num];
+        totalSalesPerHour += storeThree.perHourSale[num];
+        totalSalesPerHour += storeFour.perHourSale[num];
+        totalSalesPerHour += storeFive.perHourSale[num];
+ 
+    var tdTotalSalesPerHour = document.createElement('td');
+    tdTotalSalesPerHour.textContent = totalSalesPerHour;
+    rowTotalSalesPerHour.appendChild(tdTotalSalesPerHour);
 }
 
-
-
-// Table data
-
-// addElement(table, 'salesReport')
-// function addElement(tag, container, text) {
-//     var element = document.createElement(tag);
-//     container.appendChild(element);
-//     element.textContent = text;
-//     return element;
-// }
 // Function Invocations
+
+// Header
+renderHeader();
 
 getPerHourSale(storeOne);
 getPerHourSale(storeTwo);
@@ -232,17 +176,17 @@ storeThree.renderRow();
 storeFour.renderRow();
 storeFive.renderRow();
 
+// Needs to be refactor later
+var rowTotalSalesPerHour = document.createElement('tr');
+salesTable.appendChild(rowTotalSalesPerHour);
 
-getTotalSalesPerHour();
+var rowTotal = document.createElement('td');
+rowTotal.textContent = 'Totals';
+rowTotalSalesPerHour.appendChild(rowTotal);
 
-// renderRow(storeOne);
-// renderRow(storeTwo);
-// renderRow(storeThree);
-// renderRow(storeFour);
-// renderRow(storeFive);
+// Footer
+for(var i = 0; i < hours.length; i++){
+renderFooter(i);
+}
 
-// displaySales(storeOne);
-// displaySales(storeTwo);
-// displaySales(storeThree);
-// displaySales(storeFour);
-// displaySales(storeFive);
+
