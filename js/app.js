@@ -39,62 +39,6 @@ var storeThree = new Store('Dubai', 11, 38, 3.7);
 var storeFour = new Store('Paris', 20, 38, 2.8);
 var storeFive = new Store('Lima', 2, 16, 4.6);
 
-// var storeOne = {
-//     location: 'Seattle',
-//     minCustomer: 23,
-//     maxCustomer: 65,
-//     averageSale: 6.3,
-//     getRandomNumberofCustomers: function (min, max) {
-//         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
-//     },
-//     perHourSale: []
-// };
-
-// var storeTwo = {
-//     location: 'Tokyo',
-//     minCustomer: 3,
-//     maxCustomer: 24,
-//     averageSale: 1.2,
-//     getRandomNumberofCustomers: function (min, max) {
-//         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
-//     },
-//     perHourSale: []
-// };
-
-// var storeThree = {
-//     location: 'Dubai',
-//     minCustomer: 11,
-//     maxCustomer: 38,
-//     averageSale: 3.7,
-//     getRandomNumberofCustomers: function (min, max) {
-//         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
-//     },
-//     perHourSale: []
-// };
-
-// var storeFour = {
-//     location: 'Paris',
-//     minCustomer: 20,
-//     maxCustomer: 38,
-//     averageSale: 2.3,
-//     getRandomNumberofCustomers: function (min, max) {
-//         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
-//     },
-//     perHourSale: []
-// };
-
-// var storeFive = {
-//     location: 'Lima',
-//     minCustomer: 2,
-//     maxCustomer: 16,
-//     averageSale: 4.6,
-//     getRandomNumberofCustomers: function (min, max) {
-//         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is exclusive and the minimum is inclusive
-//     },
-//     perHourSale: []
-// };
-
-
 //Global Functions
 
 function getPerHourSale(store) {
@@ -176,7 +120,7 @@ storeThree.renderRow();
 storeFour.renderRow();
 storeFive.renderRow();
 
-// Needs to be refactor later
+// Needs to be refactored later
 var rowTotalSalesPerHour = document.createElement('tr');
 salesTable.appendChild(rowTotalSalesPerHour);
 
