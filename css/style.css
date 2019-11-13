@@ -1,3 +1,9 @@
+th {
+    background: bisque;
+} 
  td {
     border: 1px solid black;
+    text-align: center;
+    padding: 2px;
+    background: lavender;
   }
