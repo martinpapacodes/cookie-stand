@@ -12,3 +12,21 @@ th {
     background-color: rgb(94, 202, 202);
     padding: 10px;
   }
+
+  /* Homepage CSS */
+  header {
+    background-color: rgb(40, 209, 125);
+  }
+
+  h1 {
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  li {
+    display: inline;
+  }
+
+  footer {
+    text-align: center;
+  }
