@@ -8,11 +8,7 @@ function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []
     this.maxCustomer = maxCustomer;
     this.averageSale = averageSale;
     this.perHourSale = perHourSale;
-    // Daesy code
-    //this.perHourSale = [];
-    this.getRandomNumOfCustomers = function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    
     this.renderRow = function () {
         var newRow = document.createElement('tr');
         salesTable.appendChild(newRow);
@@ -42,10 +38,12 @@ var storeFour = new Store('Paris', 20, 38, 2.8);
 var storeFive = new Store('Lima', 2, 16, 4.6);
 
 //Global Functions
-
+function getRandomNumOfCustomers (min, max) {
+     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function getPerHourSale(store) {
     for (var i = 0; i < hours.length; i++) {
-        var cookiesSalePerHour = store.averageSale * store.getRandomNumOfCustomers(store.minCustomer, store.maxCustomer);
+        var cookiesSalePerHour = store.averageSale * getRandomNumOfCustomers(store.minCustomer, store.maxCustomer);
         store.perHourSale[i] = Math.ceil(cookiesSalePerHour);
     }
 }
