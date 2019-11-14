@@ -1,6 +1,7 @@
 'use strict';
 
 const hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'];
+const allStores = [];
 
 function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []) {
     this.location = location;
@@ -8,7 +9,6 @@ function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []
     this.maxCustomer = maxCustomer;
     this.averageSale = averageSale;
     this.perHourSale = perHourSale;
-    
     this.renderRow = function () {
         var newRow = document.createElement('tr');
         salesTable.appendChild(newRow);
@@ -36,6 +36,13 @@ var storeTwo = new Store('Tokyo', 3, 24, 1.2);
 var storeThree = new Store('Dubai', 11, 38, 3.7);
 var storeFour = new Store('Paris', 20, 38, 2.8);
 var storeFive = new Store('Lima', 2, 16, 4.6);
+
+allStores.push(storeOne);
+allStores.push(storeTwo);
+allStores.push(storeThree);
+allStores.push(storeFour);
+allStores.push(storeFive);
+
 
 //Global Functions
 function getRandomNumOfCustomers (min, max) {
