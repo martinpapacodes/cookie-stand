@@ -11,17 +11,20 @@ function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []
     this.averageSale = averageSale;
     this.perHourSale = perHourSale;
     this.renderRow = function () {
+       
         var newRow = document.createElement('tr');
-        salesTable.appendChild(newRow);
+        salesTable.appendChild(tBody);
+        tBody.appendChild(newRow);
 
+        //rowTitle - First column of the table(location name)
         var rowTitle = document.createElement('td');
-        rowTitle.textContent = this.location;
         newRow.appendChild(rowTitle);
+        rowTitle.textContent = this.location;
 
         for (var i = 0; i < this.perHourSale.length; i++) {
             var td = document.createElement('td');
-            td.textContent = this.perHourSale[i];
             newRow.appendChild(td);
+            td.textContent = this.perHourSale[i];
         }
         // Adds the total per day per store and display in last column
         var tdTotalPerDay = document.createElement('td');
@@ -51,17 +54,40 @@ allStores.push(storeThree);
 allStores.push(storeFour);
 allStores.push(storeFive);
 
+// Form 
+
+var formSales = document.getElementById('formSales');
+
+function submitHandler(event) {
+    event.preventDefault();
+    var store = new Store(event.target.location.value, event.target.minCustomer.value, event.target.maxCustomer.value, event.target.averageSale.value);
+    console.log(store);
+    allStores.push(store);
+
+    event.target.reset();
+    
+getPerHourSale(store);
+store.renderRow();
+}
+
+formSales.addEventListener('submit', submitHandler);
+
+
 
 //Global Functions
+
+
 function getRandomNumOfCustomers(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 function getPerHourSale(store) {
     for (var i = 0; i < hours.length; i++) {
         var cookiesSalePerHour = store.averageSale * getRandomNumOfCustomers(store.minCustomer, store.maxCustomer);
         store.perHourSale[i] = Math.ceil(cookiesSalePerHour);
     }
 }
+
 // function getTotalSalePerDay(store) {
 //     var totalSale = 0;
 //     for (var i = 0; i < store.perHourSale.length; i++) {
@@ -79,25 +105,27 @@ parentElement.appendChild(salesTable);
 function renderHeader() {
 
     // --------- Table header ----------
-    var rowHeader = document.createElement('tr');
-    salesTable.appendChild(rowHeader);
+    // var rowHeader = document.createElement('tr');
+    var tHead = document.createElement('thead');
+    // salesTable.appendChild(rowHeader);
+       salesTable.appendChild(tHead);
 
     // Creates an empty header on the very top left to shift the hours to the right
     var emptyHeader = document.createElement('th')
     emptyHeader.textContent = "";
-    rowHeader.appendChild(emptyHeader);
+    tHead.appendChild(emptyHeader);
 
     // Loops through the hours array and render in table header
     for (var i = 0; i < hours.length; i++) {
         var tableHeader = document.createElement('th');
-        rowHeader.appendChild(tableHeader);
+        tHead.appendChild(tableHeader);
         tableHeader.textContent = hours[i];
     }
 
     // Display Daily Location Total in the header
     var dailyTotalHeader = document.createElement('th');
     dailyTotalHeader.textContent = 'Daily Location Total';
-    rowHeader.appendChild(dailyTotalHeader);
+    tHead.appendChild(dailyTotalHeader);
 }
 
 // Creates row for sales totals per hour a.k.a footer
@@ -163,6 +191,7 @@ getPerHourSale(storeFive);
 // storeThree.getTotalSalePerDay();
 // storeFour.getTotalSalePerDay();
 // storeFive.getTotalSalePerDay();
+var tBody = document.createElement('tbody');
 
 storeOne.renderRow();
 storeTwo.renderRow();
@@ -170,13 +199,17 @@ storeThree.renderRow();
 storeFour.renderRow();
 storeFive.renderRow();
 
-// Needs to be refactored later
+// Needs to be refactored later, will create an addElement function
+var tFoot = document.createElement('tfoot');
 var rowTotalSalesPerHour = document.createElement('tr');
-salesTable.appendChild(rowTotalSalesPerHour);
-
 var rowTotal = document.createElement('td');
-rowTotal.textContent = 'Totals';
+
+salesTable.appendChild(tFoot);
+tFoot.appendChild(rowTotalSalesPerHour);
 rowTotalSalesPerHour.appendChild(rowTotal);
+rowTotal.textContent = 'Totals';
+
+
 
 // Footer
 for (var i = 0; i < hours.length; i++) {
@@ -187,22 +220,5 @@ var tdTotalOfTotals = document.createElement('td');
 rowTotalSalesPerHour.appendChild(tdTotalOfTotals);
 tdTotalOfTotals.textContent = getTotalSalesAllStores();
 
-
-// Form 
-
-var formSales = document.getElementById('formSales');
-
-function submitHandler(event) {
-    event.preventDefault();
-    var store = new Store(event.target.location.value, event.target.minCustomer.value, event.target.maxCustomer.value, event.target.averageSale.value);
-    console.log(store);
-    allStores.push(store);
-    
-getPerHourSale(store);
-store.renderRow();
-
-}
-
-formSales.addEventListener('submit', submitHandler);
 
 
