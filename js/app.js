@@ -2,6 +2,7 @@
 
 const hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'];
 const allStores = [];
+const totalSalesforAllStores = [];
 
 function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []) {
     this.location = location;
@@ -24,8 +25,15 @@ function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []
         }
         // Adds the total per day per store and display in last column
         var tdTotalPerDay = document.createElement('td');
-        tdTotalPerDay.textContent = getTotalSalePerDay(this);
+        tdTotalPerDay.textContent = this.getTotalSalePerDay();
         newRow.appendChild(tdTotalPerDay);
+    }
+    this.getTotalSalePerDay = function() {
+        var totalSale = 0;
+        for (var i = 0; i < this.perHourSale.length; i++) {
+            totalSale += this.perHourSale[i];
+        }
+        return totalSale;
     }
 }
 
@@ -54,14 +62,13 @@ function getPerHourSale(store) {
         store.perHourSale[i] = Math.ceil(cookiesSalePerHour);
     }
 }
-
-function getTotalSalePerDay(store) {
-    var totalSale = 0;
-    for (var i = 0; i < store.perHourSale.length; i++) {
-        totalSale += store.perHourSale[i];
-    }
-    return totalSale;
-}
+// function getTotalSalePerDay(store) {
+//     var totalSale = 0;
+//     for (var i = 0; i < store.perHourSale.length; i++) {
+//         totalSale += store.perHourSale[i];
+//     }
+//     return totalSale;
+// }
 
 // ------- Table rendering starts here --------
 
@@ -87,7 +94,7 @@ function renderHeader() {
         tableHeader.textContent = hours[i];
     }
 
-    // Display Daily Location Total in the table
+    // Display Daily Location Total in the header
     var dailyTotalHeader = document.createElement('th');
     dailyTotalHeader.textContent = 'Daily Location Total';
     rowHeader.appendChild(dailyTotalHeader);
@@ -110,6 +117,36 @@ function renderFooter(num) {
     rowTotalSalesPerHour.appendChild(tdTotalSalesPerHour);
 }
 
+// Total sales of all stores
+
+function getTotalSalesAllStores() {
+    
+    for(var i = 0; i < allStores.length; i++) {
+        totalSalesforAllStores.push(allStores[i].getTotalSalePerDay())
+    }
+
+    var totalSales = 0;
+    for(var i = 0; i < totalSalesforAllStores.length; i++){
+        totalSales += totalSalesforAllStores[i]
+    }
+    
+    return totalSales;
+}
+
+
+// function renderFooter(num) {
+  
+//     var totalSalesPerHour = 0;
+
+//     for(var i = 0; i < allStores.length; i++){
+//         totalSalesPerHour += allStores[i].perHourSale[i];
+//     }
+ 
+//     var tdTotalSalesPerHour = document.createElement('td');
+//     tdTotalSalesPerHour.textContent = totalSalesPerHour;
+//     rowTotalSalesPerHour.appendChild(tdTotalSalesPerHour);
+// }
+
 // Function Invocations
 
 // Header
@@ -120,6 +157,12 @@ getPerHourSale(storeTwo);
 getPerHourSale(storeThree);
 getPerHourSale(storeFour);
 getPerHourSale(storeFive);
+
+// storeOne.getTotalSalePerDay();
+// storeTwo.getTotalSalePerDay();
+// storeThree.getTotalSalePerDay();
+// storeFour.getTotalSalePerDay();
+// storeFive.getTotalSalePerDay();
 
 storeOne.renderRow();
 storeTwo.renderRow();
@@ -139,3 +182,9 @@ rowTotalSalesPerHour.appendChild(rowTotal);
 for(var i = 0; i < hours.length; i++){
 renderFooter(i);
 }
+
+var tdTotalOfTotals = document.createElement('td');
+rowTotalSalesPerHour.appendChild(tdTotalOfTotals);
+tdTotalOfTotals.textContent = getTotalSalesAllStores();
+
+
