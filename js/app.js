@@ -28,7 +28,7 @@ function Store(location, minCustomer, maxCustomer, averageSale, perHourSale = []
         tdTotalPerDay.textContent = this.getTotalSalePerDay();
         newRow.appendChild(tdTotalPerDay);
     }
-    this.getTotalSalePerDay = function() {
+    this.getTotalSalePerDay = function () {
         var totalSale = 0;
         for (var i = 0; i < this.perHourSale.length; i++) {
             totalSale += this.perHourSale[i];
@@ -53,8 +53,8 @@ allStores.push(storeFive);
 
 
 //Global Functions
-function getRandomNumOfCustomers (min, max) {
-     return Math.floor(Math.random() * (max - min + 1)) + min;
+function getRandomNumOfCustomers(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function getPerHourSale(store) {
     for (var i = 0; i < hours.length; i++) {
@@ -103,15 +103,15 @@ function renderHeader() {
 // Creates row for sales totals per hour a.k.a footer
 
 function renderFooter(num) {
-  
+
     var totalSalesPerHour = 0;
     // var arrTotalSalesPerHour = [];
-        totalSalesPerHour = storeOne.perHourSale[num];
-        totalSalesPerHour += storeTwo.perHourSale[num];
-        totalSalesPerHour += storeThree.perHourSale[num];
-        totalSalesPerHour += storeFour.perHourSale[num];
-        totalSalesPerHour += storeFive.perHourSale[num];
- 
+    totalSalesPerHour = storeOne.perHourSale[num];
+    totalSalesPerHour += storeTwo.perHourSale[num];
+    totalSalesPerHour += storeThree.perHourSale[num];
+    totalSalesPerHour += storeFour.perHourSale[num];
+    totalSalesPerHour += storeFive.perHourSale[num];
+
     var tdTotalSalesPerHour = document.createElement('td');
     tdTotalSalesPerHour.textContent = totalSalesPerHour;
     rowTotalSalesPerHour.appendChild(tdTotalSalesPerHour);
@@ -120,28 +120,28 @@ function renderFooter(num) {
 // Total sales of all stores
 
 function getTotalSalesAllStores() {
-    
-    for(var i = 0; i < allStores.length; i++) {
+
+    for (var i = 0; i < allStores.length; i++) {
         totalSalesforAllStores.push(allStores[i].getTotalSalePerDay())
     }
 
     var totalSales = 0;
-    for(var i = 0; i < totalSalesforAllStores.length; i++){
+    for (var i = 0; i < totalSalesforAllStores.length; i++) {
         totalSales += totalSalesforAllStores[i]
     }
-    
+
     return totalSales;
 }
 
 
 // function renderFooter(num) {
-  
+
 //     var totalSalesPerHour = 0;
 
 //     for(var i = 0; i < allStores.length; i++){
 //         totalSalesPerHour += allStores[i].perHourSale[i];
 //     }
- 
+
 //     var tdTotalSalesPerHour = document.createElement('td');
 //     tdTotalSalesPerHour.textContent = totalSalesPerHour;
 //     rowTotalSalesPerHour.appendChild(tdTotalSalesPerHour);
@@ -179,12 +179,30 @@ rowTotal.textContent = 'Totals';
 rowTotalSalesPerHour.appendChild(rowTotal);
 
 // Footer
-for(var i = 0; i < hours.length; i++){
-renderFooter(i);
+for (var i = 0; i < hours.length; i++) {
+    renderFooter(i);
 }
 
 var tdTotalOfTotals = document.createElement('td');
 rowTotalSalesPerHour.appendChild(tdTotalOfTotals);
 tdTotalOfTotals.textContent = getTotalSalesAllStores();
+
+
+// Form 
+
+var formSales = document.getElementById('formSales');
+
+function submitHandler(event) {
+    event.preventDefault();
+    var store = new Store(event.target.location.value, event.target.minCustomer.value, event.target.maxCustomer.value, event.target.averageSale.value);
+    console.log(store);
+    allStores.push(store);
+    
+getPerHourSale(store);
+store.renderRow();
+
+}
+
+formSales.addEventListener('submit', submitHandler);
 
 
