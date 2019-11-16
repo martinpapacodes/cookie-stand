@@ -72,10 +72,7 @@ store.renderRow();
 
 formSales.addEventListener('submit', submitHandler);
 
-
-
 //Global Functions
-
 
 function getRandomNumOfCustomers(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -209,16 +206,11 @@ tFoot.appendChild(rowTotalSalesPerHour);
 rowTotalSalesPerHour.appendChild(rowTotal);
 rowTotal.textContent = 'Totals';
 
-
-
 // Footer
 for (var i = 0; i < hours.length; i++) {
     renderFooter(i);
 }
-
+getTotalSalesAllStores();
 var tdTotalOfTotals = document.createElement('td');
 rowTotalSalesPerHour.appendChild(tdTotalOfTotals);
 tdTotalOfTotals.textContent = getTotalSalesAllStores();
-
-
-
