@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet"> 
     <title>Sales</title>
 </head>
 <body>
     <header>
-    
+        <h1>Pat's Salmon Cookies</h1>
+        <img src="img/salmon.png" alt="A photo of a Salmon fish. It is Pat's Salmon Cookies logo and mascot">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sales.html">Sales</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                </li>
+            </ul>
+        </nav>
     </header>
     <main>
 
         <article>
         <form id="formSales">
             <fieldset>
-                <legend>Add a location</legend>
-                 
+                <legend>Add a Location:</legend>
                 <div>
                     <label for="location">Location:</label>
                     <input type="text" name="location" id="">
@@ -37,11 +47,16 @@
 
             </fieldset>
         </form>
+        
         </article>
-    </main>
-    <h2>Sales Report</h2>
-    <div id="salesReport"></div>
-    
+
+        <article>
+                <h2>Sales Report</h2>
+                <div id="salesReport"></div>
+        </article>
+      
     <script src="js/app.js"></script>
+    </main>
+    
 </body>
 </html>

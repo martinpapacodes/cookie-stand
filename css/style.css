@@ -1,32 +1,111 @@
-th {
-    background: bisque;
-} 
- td {
-    border: 1px solid black;
-    text-align: center;
-    padding: 2px;
-    background: lavender;
-  }
 
-  h2 {
-    background-color: rgb(94, 202, 202);
-    padding: 10px;
-  }
-
-  /* Homepage CSS */
-  header {
-    background-color: rgb(40, 209, 125);
-  }
-
-  h1 {
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-
-  li {
+/* header css */
+header {
+    background: rgb(182, 57, 57);
+}
+header h1 {
     display: inline;
-  }
+    font-size: 4.5em;
+    font-family: 'Dancing Script', cursive; /* A custom Google font for highlights */
+    color: white; /* Specified different font colors for all three font usages */
+    margin-left: .3em;
+}
 
-  footer {
+header img {
+    float: right;
+    margin-right: 4em;
+}
+
+header ul {
+    margin-left: 60px;
+    margin-top: 20px;
+}
+
+header ul li {
+    display: inline;
+    font-size: 2em;
+    background-color: rgb(36, 35, 35);
+    color: white;
+    text-decoration: none;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+
+/* main css */
+main {
+    margin-top: 30px;
+    height: 500px;
+
+
+}
+main h2 {
+    font-size: 2.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif; /* A specified standard serif web font for text (such as Georgia, Times, etc.) */
+    color: rgb(226, 135, 31); /* Specified different font colors for all three font usages */   
+}
+
+
+/* footer css */
+footer {
+    background: rgb(255, 126, 126);
     text-align: center;
-  }
+}
+
+footer p {
+
+    color: white;
+}
+
+
+
+
+
+
+/* Sales.html css */
+
+main article {
+    margin: 12px;
+}
+article fieldset legend {
+    font-family: Verdana, Geneva, Tahoma, sans-serif; /* A specified standard sans-serif web font for data (such as Arial, Verdana, or Helvetica)*/
+    color: rgb(196, 125, 19); /* Specified different font colors for all three font usages */   
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+form label {
+    font-size: 20px;
+    margin: 10px;
+}
+
+form input {
+    margin: 10px;
+}
+
+form button {
+    font-size: 1.4em;
+    background-color: rgb(255, 175, 138);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+table tr td  {
+    padding: 5px;
+    border: black solid;
+    background-color: rgb(228, 220, 209);
+    
+}
+
+table th {
+    background-color: khaki;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+
+
+
+
